@@ -1,0 +1,10 @@
+ingress:
+  enabled: false
+  host: webapp.claveblanca.com
+labels:
+  app.kubernetes.io/name: nginx
+  app.kubernetes.io/instance: nginx-asinatra
+image:
+  name: asinatra/secure:v1.0.3
+container:
+  port: 5000

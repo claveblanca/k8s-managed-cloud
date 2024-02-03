@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+namespace: team1
+metadata:
+  name: compute-resources
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: 1Gi
+    limits.cpu: "2"
+    limits.memory: 2Gi

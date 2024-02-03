@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/instance: nginx-asinatra
+spec:
+  containers:
+  - name: nginx
+    image: nginx:alpine
+    ports:
+      - name: http
+        containerPort: 80
+        protocol: TCP
+      - name: nginx-metrics
+        containerPort: 8081
+        protocol: TCP
+    volumeMounts:
+      - name: nginx-conf
+        mountPath: /etc/nginx/nginx.conf
+        subPath: nginx.conf
+  
+  - name: nginx-exporter
+    image: nginx/nginx-prometheus-exporter:0.10.0
+    ports:
+      - name: metrics
+        containerPort: 9113
+        protocol: TCP
+    args:
+      - -nginx.scrape-uri=http://localhost:8081/nginx_metrics
+  
+  volumes:
+    - name: nginx-conf
+      configMap:
+        name: nginx-conf

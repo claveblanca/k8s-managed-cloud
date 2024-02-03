@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+  labels:
+    app.kubernetes.io/instance: example-webapp-test
+  name: example-webapp-test
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: webapp.ynovsophia.ddns.net
+    http:
+      paths:
+      - backend:
+          service:
+            name: webapp-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - webapp.ynovsophia.ddns.net
+    secretName: webapp-general-tls

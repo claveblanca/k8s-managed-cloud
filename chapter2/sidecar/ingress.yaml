@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+  labels:
+    app.kubernetes.io/instance: example-nginx-test
+  name: example-nginx-test
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: sidecar.ynovsophia.ddns.net
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - sidecar.ynovsophia.ddns.net
+    secretName: sidecar-general-tls

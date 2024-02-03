@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:  
+  name: nginx-nodeport-service
+spec:
+  selector:    
+    app.kubernetes.io/name: nginx-nodeport
+    app.kubernetes.io/instance: nginx-asinatra
+  type: NodePort
+  ports:  
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30000
+    protocol: TCP

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: ns2
+  labels:
+    app: debug
+spec:
+  containers:
+  - name: debug
+    image: quay.io/curl/curl:latest
+    command: ["sleep"]
+    args: ["5000"]

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-clip
+  labels:
+    app.kubernetes.io/name: nginx-clip
+    app.kubernetes.io/instance: nginx-asinatra
+spec:
+  containers:
+  - name: nginx
+    image: nginx:alpine
+    ports:
+      - name: http
+        containerPort: 80
+        protocol: TCP

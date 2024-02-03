@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  labels:
+    app.kubernetes.io/name: webapp
+    app.kubernetes.io/instance: webapp-asinatra
+spec:
+  containers:
+  - name: webapp
+    image: asinatra/flask-app
+    ports:
+      - name: http
+        containerPort: 5000
+        protocol: TCP
+  

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod
+spec:
+  initContainers:
+    - name: create-empty-file
+      image: alpine
+      command: ["touch", "/usr/local/files/empty_file"]
+      volumeMounts:
+      - name: volume-name
+        mountPath: /usr/local/files
+  containers:
+    - name: demo
+      image: alpine
+      command: ["sleep", "3600"]
+      volumeMounts:
+      - name: volume-name
+        mountPath: /usr/local/files
+  volumes:
+    - name: volume-name
+      persistentVolumeClaim:
+        claimName: container-storage

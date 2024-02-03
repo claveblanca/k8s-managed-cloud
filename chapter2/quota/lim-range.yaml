@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: LimitRange
+namespace: team1
+metadata:
+  name: resource-constraint
+spec:
+  limits:
+  - default:
+      cpu: 100m
+    defaultRequest:
+      cpu: 50m
+    max:
+      cpu: 300m
+    min:
+      cpu: 50m
+    type: Container
